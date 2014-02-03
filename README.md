@@ -21,6 +21,25 @@ Make sure installation was successful. You can test it on MATLAB as follows.
     
 You should get `mecab of 0.996`
 
+###Checking Locale settings
+
+On Windows MATLAB uses the locale settings from Region and Langauge control panel. If these are not set correctly, Japanese text may not be displayed correctly. Run `feature locale` at MATLAB prompt and make sure you get the following.
+
+               ctype: 'ja_JP.Shift_JIS'
+             collate: 'ja_JP.Shift_JIS'
+                time: 'ja_JP.Shift_JIS'
+             numeric: 'en_US_POSIX.Shift_JIS'
+            monetary: 'ja_JP.Shift_JIS'
+            messages: 'ja_JP.Shift_JIS'
+            encoding: 'Shift_JIS'
+    terminalEncoding: 'Shift_JIS'
+         jvmEncoding: 'MS932'
+              status: 'MathWorks locale management system initialized.'
+             warning: '
+
+
+If not, go to Control Panel > Region and Langauge and change everything to Japanese: Format, Location, Keyboard and Language, and finally Advanced > System Locale. 
+
 ###Inserting whitespaces into Japanese text by word boundaries
 
 Now you can use MeCab to insert whitespaces around words. MeCab is a command line tool. You pass the source text file and specify the output filename, and MeCab write out the result to the specified file.
@@ -134,6 +153,4 @@ This is just a scatter plot where we place text instead of points.
         end
     end
 
-###One problem
 
-For some reason, Japanese text shows up as arrows on this plot. Is there a way to fix it?
