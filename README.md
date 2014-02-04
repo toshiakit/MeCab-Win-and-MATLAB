@@ -6,11 +6,11 @@ Trying out MeCab with MATLAB on Windows
 
 ###MeCab - Japanese Morphological Analyzer for text processing
 
-When analyzing text, the first step usually involves getting the word counts. This is fairly easy with English as you can separate each word by whitespace. Japanese text don't use whitespace characters, so this approach doesn't work. So you need a morphological analyzer to identify word separations. MeCab is one of the most commonly used open source morphological analyzer. You can download it from [Google Code](https://code.google.com/p/mecab/downloads/list).
+When analyzing text, the first step usually involves getting the word counts. This is fairly easy with English as you can separate each word by whitespace. Japanese texts don't use whitespace characters, so this approach doesn't work. Hence you need a morphological analyzer to identify word separations. MeCab is one of the most commonly used open source morphological analyzer. You can download it from [Google Code](https://code.google.com/p/mecab/downloads/list).
 
 ###Installation
 
-The easiest option is download Windows executable [mecab-0.996.exe](https://code.google.com/p/mecab/downloads/detail?name=mecab-0.996.exe&can=2&q=). When you run the installer, make sure you select 'UTF-8' encoding. 
+The easiest option is to download Windows executable [mecab-0.996.exe](https://code.google.com/p/mecab/downloads/detail?name=mecab-0.996.exe&can=2&q=). When you run the installer, make sure you select 'UTF-8' encoding. 
 
 Make sure installation was successful. You can test it on MATLAB as follows.
 
@@ -23,7 +23,7 @@ You should get `mecab of 0.996`
 
 ###Checking Locale settings
 
-On Windows MATLAB uses the locale settings from Region and Langauge control panel. If these are not set correctly, Japanese text may not be displayed correctly. Run `feature locale` at MATLAB prompt and make sure you get the following.
+On Windows MATLAB uses the locale settings from `Region and Language` control panel. If these are not set correctly, Japanese text may not be displayed correctly. Run `feature locale` at MATLAB prompt and make sure you get the following.
 
                ctype: 'ja_JP.Shift_JIS'
              collate: 'ja_JP.Shift_JIS'
@@ -38,7 +38,7 @@ On Windows MATLAB uses the locale settings from Region and Langauge control pane
              warning: '
 
 
-If not, go to Control Panel > Region and Langauge and change everything to Japanese: Format, Location, Keyboard and Language, and finally Advanced > System Locale. 
+If not, go to `Control Panel` > `Region and Language` and change everything to Japanese: `Formats`, `Location`,  `Keyboards and Languages`, and finally `Administrative` > `Change system Locale`. 
 
 ###Inserting whitespaces into Japanese text by word boundaries
 
@@ -115,7 +115,7 @@ Now that we have the tokenized text and word counts, perhaps it is interesting t
 
 ###Randomize the positions of words
 
-We want to randomize but place high word count words near the center. We can do this by using a point cloud with normal distribution that centers around mean. We can also control the spacing with standard deviation.
+We want to randomize but place high word count words near the center. We can do this by using a point cloud with normal distribution that centers on mean. We can also control the spacing with standard deviation.
 
     % initialize position matrix
     pos = zeros(length(key_words),1);
@@ -152,5 +152,6 @@ This is just a scatter plot where we place text instead of points.
             set(h,'Rotation',270);
         end
     end
+    hold off
 
 
