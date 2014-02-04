@@ -1,31 +1,51 @@
 %% MeCab - Japanese Morphological Analyzer for text processing
 % When analyzing text, the first step usually involves getting the word
 % counts. This is fairly easy with English as you can separate each word by
-% whitespace. Japanese text don't use whitespace characters, so this
-% approach doesn't work. So you need a morphological analyzer to identify
-% word separations. MeCab is one of the most commonly used open source
-% morphological analyzer. You can download it from 
+% whitespace. Japanese texts don't use whitespace characters, so this
+% approach doesn't work. Hence you need a morphological analyzer to 
+% identify word separations. MeCab is one of the most commonly used open source
+% morphological analyzers. You can download it from 
 % <https://code.google.com/p/mecab/downloads/list Google Code>
-%
 
 %% Installation
-% The easiest option is download Windows executable 
+% The easiest option is to download Windows executable 
 % <https://code.google.com/p/mecab/downloads/detail?name=mecab-0.996.exe&can=2&q= mecab-0.996.exe>
 % 
 % When you run the installer, make sure you select 'UTF-8' encoding.
 % 
-% Make sure installation was successful. You can test it on MATLAB as 
-% follows.
+% You can check if the installation was success as follows on MATLAB:
 
 % check to see if you can call MeCab. 
 % you should get "mecab of 0.996"
 system('mecab -v','-echo');
 
 clearvars ans
+%% Checking locale settings
+% On Windows MATLAB uses the locale settings from 'Region and Language' 
+% control panel. If these are not set correctly, Japanese text may not be 
+% displayed correctly. Run 'feature locale' at MATLAB prompt and make sure 
+% you get the following.
+%
+%               ctype: 'ja_JP.Shift_JIS'
+%             collate: 'ja_JP.Shift_JIS'
+%                time: 'ja_JP.Shift_JIS'
+%             numeric: 'en_US_POSIX.Shift_JIS'
+%            monetary: 'ja_JP.Shift_JIS'
+%            messages: 'ja_JP.Shift_JIS'
+%            encoding: 'Shift_JIS'
+%    terminalEncoding: 'Shift_JIS'
+%         jvmEncoding: 'MS932'
+%              status: 'MathWorks locale management system initialized.'
+%             warning: '
+%
+% If not, go to 'Control Panel' > 'Region and Language' and change 
+% everything to Japanese: 'Formats', 'Location', 'Keyboards and Languages', 
+% and finally 'Administrative' > 'Change system locale'. 
+
 %% Inserting whitespaces into Japanese text by word boundaries
 % Now you can use MeCab to insert whitespaces around words. MeCab is a
 % command line tool. You pass the source text file and specify the output 
-% filename, and MeCab write out the result to the specified file.
+% filename, and MeCab writes out the result to the specified file.
 %
 % MeCab also outputs other linguistical information by default, but we 
 % just need the processed text for now. So suppress other outputs by 
@@ -58,7 +78,7 @@ end
 clearvars ans command dir fid infile
 %% Tokenize the Japanese text
 % Now we have the processed Japanese text ready for tokenization and
-% generate word counts
+% word count generation.
 
 % specify the delimiters to separate text into tokens
 delims = {' ','@','$','/','#','.','-',':','&','*',...
@@ -97,7 +117,7 @@ sizes = key_counts * 20;
 %% Randomize the positions of words
 % We want to randomize but place high word count words near the center. 
 % We can do this by using a point cloud with normal distribution that 
-% centers around mean. We can also control the spacing with standard 
+% centers on mean. We can also control the spacing with standard 
 % deviation.
 
 % initialize position matrix
@@ -135,7 +155,4 @@ for i=1:length(IX)
         set(h,'Rotation',270);
     end
 end
-
-%% One problem
-% For some reason, Japanese text shows up as arrows on this plot. 
-% Is there a way to fix it?
+hold off
